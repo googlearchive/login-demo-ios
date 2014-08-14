@@ -71,7 +71,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
                                   action:@selector(anonymousButtonPressed)
                         forControlEvents:UIControlEventTouchUpInside];
     [self.logoutButton addTarget:self
-                          action:@selector(logout)
+                          action:@selector(logoutButtonPressed)
                 forControlEvents:UIControlEventTouchUpInside];
 
     // create the simple login instance
