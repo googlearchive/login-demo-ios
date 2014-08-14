@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GooglePlus/GooglePlus.h>
 
-@interface SLViewController : UIViewController
+@interface SLViewController : UIViewController<GPPSignInDelegate>
 
 @end

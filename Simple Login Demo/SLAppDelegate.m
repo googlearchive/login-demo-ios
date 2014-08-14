@@ -8,12 +8,25 @@
 
 #import "SLAppDelegate.h"
 
+#import <GooglePlus/GooglePlus.h>
+
 @implementation SLAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    // this is required by the Google+ SDK
+    return [GPPURLHandler handleURL:url
+                  sourceApplication:sourceApplication
+                         annotation:annotation];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
