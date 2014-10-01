@@ -99,7 +99,9 @@
 - (void) requestTwitterCredentials {
     [self.request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            [self callbackIfExistsWithError:error authData:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self callbackIfExistsWithError:error authData:nil];
+            });
         } else {
             [self authenticateWithTwitterCredentials:responseData];
         }
@@ -109,21 +111,38 @@
 // Step 3 -- authenticate with Firebase using Twitter credentials
 - (void) authenticateWithTwitterCredentials:(NSData *)responseData {
     NSDictionary *params = [self parseTwitterCredentials:responseData];
-    [self.ref authWithOAuthProvider:@"twitter" parameters:params withCompletionBlock:self.userCallback];
+    if (params[@"error"]) {
+        // There was an error handling the parameters, error out.
+        NSError *error = [[NSError alloc] initWithDomain:@"TwitterAuthHelper"
+                                                    code:AuthHelperErrorOAuthTokenRequestDenied
+                                                userInfo:@{NSLocalizedDescriptionKey:@"OAuth token request was denied.",
+                                                @"details": params[@"error"]}];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self callbackIfExistsWithError:error authData:nil];
+        });
+    } else {
+        [self.ref authWithOAuthProvider:@"twitter" parameters:params withCompletionBlock:self.userCallback];
+    }
 }
 
 // Step 3 Helper -- parsers credentials into dictionary
 - (NSDictionary *) parseTwitterCredentials:(NSData *)responseData {
     NSString *accountData = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    
+
     NSArray* creds = [accountData componentsSeparatedByString:@"&"];
     for (NSString* param in creds) {
         NSArray* parts = [param componentsSeparatedByString:@"="];
         [params setObject:[parts objectAtIndex:1] forKey:[parts objectAtIndex:0]];
     }
-    
-    return params;
+
+    // This is super fragile error handling, but basically check that the token and token secret are there.
+    // If not, return the result that Twitter returned.
+    if (!params[@"oauth_token_secret"] || !params[@"oauth_token"]) {
+        return @{@"error": accountData};
+    } else {
+        return params;
+    }
 }
 
 @end

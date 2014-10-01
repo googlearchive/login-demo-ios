@@ -29,7 +29,8 @@
 @end
 
 typedef NS_ENUM(NSInteger, AuthHelperError) {
-    AuthHelperErrorAccountAccessDenied = -1
+    AuthHelperErrorAccountAccessDenied = -1,
+    AuthHelperErrorOAuthTokenRequestDenied = -2
 };
 
 #endif

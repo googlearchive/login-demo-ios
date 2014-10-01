@@ -247,6 +247,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
         } else {
             // here you could display a dialog letting the user choose
             // for simplicity we just choose the first
+            [self showProgressAlert];
             [self.twitterAuthHelper authenticateAccount:[accounts firstObject]
                                            withCallback:[self loginBlockForProviderName:@"Twitter"]];
             
