@@ -17,7 +17,7 @@
 
 // The Firebase you want to use for this app
 // You must setup Simple Login for the various authentication providers in Forge
-static NSString * const kFirebaseURL = @"https://bfot.firebaseio.com";
+static NSString * const kFirebaseURL = @"https://<your-firebase>.firebaseio.com";
 
 // The app ID you setup in the facebook developer console
 static NSString * const kFacebookAppID = @"<your-facebook-app-id>";
