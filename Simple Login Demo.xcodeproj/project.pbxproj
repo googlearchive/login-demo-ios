@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F87976A19DB6EA9009383AE /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F87976919DB6EA9009383AE /* TwitterAuthHelper.m */; };
 		FB91C84219991E3F00AB077F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84119991E3F00AB077F /* Foundation.framework */; };
 		FB91C84419991E3F00AB077F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84319991E3F00AB077F /* CoreGraphics.framework */; };
 		FB91C84619991E3F00AB077F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84519991E3F00AB077F /* UIKit.framework */; };
@@ -50,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5F87976819DB6E8F009383AE /* TwitterAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
+		5F87976919DB6EA9009383AE /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
 		FB91C83E19991E3F00AB077F /* Simple Login Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Login Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB91C84119991E3F00AB077F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FB91C84319991E3F00AB077F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -183,6 +186,8 @@
 				FB91C85A19991E3F00AB077F /* SLViewController.m */,
 				FB91C85C19991E3F00AB077F /* Images.xcassets */,
 				FB91C84819991E3F00AB077F /* Supporting Files */,
+				5F87976819DB6E8F009383AE /* TwitterAuthHelper.h */,
+				5F87976919DB6EA9009383AE /* TwitterAuthHelper.m */,
 			);
 			path = "Simple Login Demo";
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 				FB91C84E19991E3F00AB077F /* main.m in Sources */,
 				FB91C85B19991E3F00AB077F /* SLViewController.m in Sources */,
 				FB91C85219991E3F00AB077F /* SLAppDelegate.m in Sources */,
+				5F87976A19DB6EA9009383AE /* TwitterAuthHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
