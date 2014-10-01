@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C7DC75119DBB694002DB448 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7DC75019DBB694002DB448 /* FacebookSDK.framework */; };
 		5F87976A19DB6EA9009383AE /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F87976919DB6EA9009383AE /* TwitterAuthHelper.m */; };
 		FB91C84219991E3F00AB077F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84119991E3F00AB077F /* Foundation.framework */; };
 		FB91C84419991E3F00AB077F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84319991E3F00AB077F /* CoreGraphics.framework */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C7DC75019DBB694002DB448 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = sdk/FacebookSDK.framework; sourceTree = "<group>"; };
 		5F87976819DB6E8F009383AE /* TwitterAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
 		5F87976919DB6EA9009383AE /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
 		FB91C83E19991E3F00AB077F /* Simple Login Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Login Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB91C89B199BB12500AB077F /* CoreMotion.framework in Frameworks */,
+				4C7DC75119DBB694002DB448 /* FacebookSDK.framework in Frameworks */,
 				FB91C899199BB11C00AB077F /* CoreLocation.framework in Frameworks */,
 				FB91C897199BB11400AB077F /* AssetsLibrary.framework in Frameworks */,
 				FB91C895199BB10700AB077F /* MediaPlayer.framework in Frameworks */,
@@ -172,6 +175,7 @@
 				FB91C84319991E3F00AB077F /* CoreGraphics.framework */,
 				FB91C84519991E3F00AB077F /* UIKit.framework */,
 				FB91C86319991E3F00AB077F /* XCTest.framework */,
+				4C7DC75019DBB694002DB448 /* FacebookSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

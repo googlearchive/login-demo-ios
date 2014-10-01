@@ -19,14 +19,16 @@
 // You must setup Simple Login for the various authentication providers in Forge
 static NSString * const kFirebaseURL = @"https://bfot.firebaseio.com";
 
-// The app ID you setup in the facebook developer console
-static NSString * const kFacebookAppID = @"<your-facebook-app-id>";
-
 // The twitter API key you setup in the Twitter developer console
 static NSString * const kTwitterAPIKey = @"<your-twitter-app-id>";
 
 // The Google client ID you setup in the Google developer console
 static NSString * const kGoogleClientID = @"<your-google-client-id>";
+
+// NOTE: You must configure Facebook in "Supporting Files/Simple Login Demo-Info.plist".
+// You need to set FacebookAppID, FacebookDisplayName, and configure a URL Scheme to match your App ID.
+// See https://developers.facebook.com/docs/ios/getting-started for more details.
+
 
 @interface SLViewController ()
 
@@ -181,15 +183,23 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 /*****************************
  *          FACEBOOK         *
  *****************************/
+
 - (void)facebookButtonPressed
 {
     [self showProgressAlert];
-    // login using Facebook
-    [self.ref authWithOAuthProvider:@"facebook" token:@"<go-get-token>" withCompletionBlock:[self loginBlockForProviderName:@"Facebook"]];
-//    [self.simpleLogin loginToFacebookAppWithId:kFacebookAppID
-//                                   permissions:@[@"email"]
-//                                      audience:ACFacebookAudienceOnlyMe
-//                           withCompletionBlock:[self loginBlockForProviderName:@"Facebook"]];
+
+    // Open a session showing the user the login UI
+    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile"]
+                                       allowLoginUI:YES
+                                  completionHandler:
+     ^(FBSession *session, FBSessionState state, NSError *error) {
+         if (error) {
+             NSLog(@"Facebook login failed. Error: %@", error);
+         } else if (state == FBSessionStateOpen) {
+             NSString *accessToken = session.accessTokenData.accessToken;
+             [self.ref authWithOAuthProvider:@"facebook" token:accessToken withCompletionBlock:[self loginBlockForProviderName:@"Facebook"]];
+         }
+     }];
 }
 
 /*****************************
