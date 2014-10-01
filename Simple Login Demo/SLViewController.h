@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <GooglePlus/GooglePlus.h>
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface SLViewController : UIViewController<GPPSignInDelegate>
+@interface SLViewController : UIViewController<GPPSignInDelegate, UIActionSheetDelegate>
 
 @end

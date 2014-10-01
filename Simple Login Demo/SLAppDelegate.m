@@ -9,6 +9,7 @@
 #import "SLAppDelegate.h"
 
 #import <GooglePlus/GooglePlus.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation SLAppDelegate
 
@@ -23,10 +24,14 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    // this is required by the Google+ SDK
-    return [GPPURLHandler handleURL:url
-                  sourceApplication:sourceApplication
-                         annotation:annotation];
+    // This is the Facebook or Google+ SDK returning to the app after authentication.
+    if ([url.scheme hasPrefix:@"fb"]) {
+        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    } else {
+        return [GPPURLHandler handleURL:url
+                      sourceApplication:sourceApplication
+                             annotation:annotation];
+    }
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
