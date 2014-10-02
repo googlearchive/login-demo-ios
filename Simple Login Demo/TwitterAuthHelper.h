@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSString *apiKey;
 @property (strong, nonatomic) NSArray *accounts;
 
-- (id) initWithFirebaseRef:(Firebase *)ref twitterApiKey:(NSString *)apiKey;
+- (id) initWithFirebaseRef:(Firebase *)ref apiKey:(NSString *)apiKey;
 
 // Step 1a
 - (void) selectTwitterAccountWithCallback:(void (^)(NSError *error, NSArray *accounts))callback;

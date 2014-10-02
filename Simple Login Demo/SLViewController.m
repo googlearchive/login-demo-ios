@@ -239,7 +239,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
  *****************************/
 - (void)twitterButtonPressed
 {
-    self.twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:self.ref twitterApiKey:kTwitterAPIKey];
+    self.twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:self.ref apiKey:kTwitterAPIKey];
     [self.twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
         if (error) {
             NSString *message = [NSString stringWithFormat:@"There was an error logging into Twitter: %@", [error localizedDescription]];

@@ -23,7 +23,7 @@
 @synthesize accounts;
 @synthesize userCallback;
 
-- (id) initWithFirebaseRef:(Firebase *)aRef twitterApiKey:(NSString *)anApiKey {
+- (id) initWithFirebaseRef:(Firebase *)aRef apiKey:(NSString *)anApiKey {
     self = [super init];
     if (self) {
         self.store = [[ACAccountStore alloc] init];
