@@ -10,7 +10,6 @@
 #import "TwitterAuthHelper.h"
 
 @interface TwitterAuthHelper ()
-@property (strong, nonatomic) SLRequest *request;
 @property (strong, nonatomic) ACAccount *account;
 @property (nonatomic, copy) void (^userCallback)(NSError *, FAuthData *);
 @end
@@ -74,8 +73,8 @@
         if (error) {
             [self callbackIfExistsWithError:error authData:nil];
         } else {
-            self.request = [self createCredentialRequestWithReverseAuthPayload:json];
-            [self requestTwitterCredentials];
+            SLRequest *request = [self createCredentialRequestWithReverseAuthPayload:json];
+            [self requestTwitterCredentials:request];
         }
     }];
 }
@@ -96,8 +95,8 @@
 }
 
 // Step 2 -- request credentials from Twitter
-- (void) requestTwitterCredentials {
-    [self.request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+- (void) requestTwitterCredentials:(SLRequest *)request {
+    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self callbackIfExistsWithError:error authData:nil];
