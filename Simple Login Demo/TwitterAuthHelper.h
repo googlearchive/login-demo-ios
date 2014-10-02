@@ -15,10 +15,10 @@
 
 @property (strong, nonatomic) ACAccountStore *store;
 @property (strong, nonatomic) Firebase *ref;
-@property (strong, nonatomic) NSString *appId;
+@property (strong, nonatomic) NSString *apiKey;
 @property (strong, nonatomic) NSArray *accounts;
 
-- (id) initWithFirebaseRef:(Firebase *)ref twitterAppId:(NSString *)appId;
+- (id) initWithFirebaseRef:(Firebase *)ref twitterApiKey:(NSString *)apiKey;
 
 // Step 1a
 - (void) selectTwitterAccountWithCallback:(void (^)(NSError *error, NSArray *accounts))callback;

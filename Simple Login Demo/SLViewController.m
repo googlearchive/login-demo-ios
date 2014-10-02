@@ -108,13 +108,13 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
         NSString *statusText;
         if ([currentUser.provider isEqualToString:@"facebook"]) {
             statusText = [NSString stringWithFormat:@"Logged in as %@ (Facebook)",
-                          currentUser.providerData[@"facebook"][@"displayName"]];
+                          currentUser.providerData[@"displayName"]];
         } else if ([currentUser.provider isEqualToString:@"twitter"]) {
             statusText = [NSString stringWithFormat:@"Logged in as %@ (Twitter)",
-                          currentUser.providerData[@"twitter"][@"username"]];
+                          currentUser.providerData[@"username"]];
         } else if ([currentUser.provider isEqualToString:@"google"]) {
             statusText = [NSString stringWithFormat:@"Logged in as %@ (Google+)",
-                          currentUser.providerData[@"google"][@"displayName"]];
+                          currentUser.providerData[@"displayName"]];
         } else if ([currentUser.provider isEqualToString:@"anonymous"]) {
             statusText = @"Logged in anonymously";
         } else {
@@ -239,7 +239,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
  *****************************/
 - (void)twitterButtonPressed
 {
-    self.twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:self.ref twitterAppId:kTwitterAPIKey];
+    self.twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:self.ref twitterApiKey:kTwitterAPIKey];
     [self.twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
         if (error) {
             NSString *message = [NSString stringWithFormat:@"There was an error logging into Twitter: %@", [error localizedDescription]];

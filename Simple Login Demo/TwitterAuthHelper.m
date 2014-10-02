@@ -18,17 +18,17 @@
 
 @synthesize store;
 @synthesize ref;
-@synthesize appId;
+@synthesize apiKey;
 @synthesize account;
 @synthesize accounts;
 @synthesize userCallback;
 
-- (id) initWithFirebaseRef:(Firebase *)aRef twitterAppId:(NSString *)anAppId {
+- (id) initWithFirebaseRef:(Firebase *)aRef twitterApiKey:(NSString *)anApiKey {
     self = [super init];
     if (self) {
         self.store = [[ACAccountStore alloc] init];
         self.ref = aRef;
-        self.appId = anAppId;
+        self.apiKey = anApiKey;
     }
     return self;
 }
@@ -85,7 +85,7 @@
     
     NSString *requestToken = [json objectForKey:@"oauth"];
     [params setValue:requestToken forKey:@"x_reverse_auth_parameters"];
-    [params setValue:self.appId forKey:@"x_reverse_auth_target"];
+    [params setValue:self.apiKey forKey:@"x_reverse_auth_target"];
     
     NSURL* url = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
     SLRequest* req = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:url parameters:params];
