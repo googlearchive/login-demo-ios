@@ -40,9 +40,18 @@
     [self.store requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
         if (granted) {
             self.accounts = [self.store accountsWithAccountType:accountType];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                callback(nil, self.accounts);
-            });
+            if ([self.accounts count] > 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    callback(nil, self.accounts);
+                });
+            } else {
+                NSError *error = [[NSError alloc] initWithDomain:@"TwitterAuthHelper"
+                                                            code:AuthHelperErrorAccountAccessDenied
+                                                        userInfo:@{NSLocalizedDescriptionKey:@"No Twitter accounts detected on phone. Please add one in the settings first."}];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    callback(error, nil);
+                });
+            }
         } else {
             NSError *error = [[NSError alloc] initWithDomain:@"TwitterAuthHelper"
                                                         code:AuthHelperErrorAccountAccessDenied
@@ -56,9 +65,16 @@
 
 // Last public facing method
 - (void) authenticateAccount:(ACAccount *)anAccount withCallback:(void (^)(NSError *error, FAuthData *authData))callback {
-    self.account = anAccount;
-    self.userCallback = callback;
-    [self makeReverseRequest]; // kick off step 1b
+    if (!anAccount) {
+        NSError *error = [[NSError alloc] initWithDomain:@"TwitterAuthHelper"
+                                                    code:AuthHelperErrorAccountAccessDenied
+                                                userInfo:@{NSLocalizedDescriptionKey:@"No Twitter account to authenticate."}];
+        callback(error, nil);
+    } else {
+        self.account = anAccount;
+        self.userCallback = callback;
+        [self makeReverseRequest]; // kick off step 1b
+    }
 }
 
 - (void) callbackIfExistsWithError:(NSError *)error authData:(FAuthData *)authData {
