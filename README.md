@@ -1,6 +1,6 @@
-# Simple Login Demo for iOS
+# Login Demo for iOS
 
-This is a demo application to demonstrate how to use Firebase's Simple Login in
+This is a demo application to demonstrate how to use Firebase's authentication in
 your iOS app.
 
 To download and setup all necessary SDKs, please run `setup.sh`.
