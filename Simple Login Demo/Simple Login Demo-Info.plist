@@ -20,19 +20,6 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.firebase.simplelogindemo</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.firebase.simplelogindemo</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -57,6 +44,26 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>FacebookAppID</key>
+	<string>&lt;YOUR FACEBOOK APP ID&gt;</string>
+	<key>FacebookDisplayName</key>
+	<string>&lt;YOUR FACEBOOK APP DISPLAY NAME&gt;</string>
+	<key>Dummy</key>
+	<string>NOTE: You need to expand the URL types below and configure &quot;&lt;YOUR FACEBOOK APP ID&gt;&quot;!</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.firebase.simplelogindemo</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.firebase.simplelogindemo</string>
+				<string>fb&lt;YOUR FACEBOOK APP ID&gt;</string>
+			</array>
+		</dict>
 	</array>
 </dict>
 </plist>

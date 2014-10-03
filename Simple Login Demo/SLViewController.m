@@ -13,18 +13,22 @@
 #import <FirebaseSimpleLogin/FirebaseSimpleLogin.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
 
+#import "TwitterAuthHelper.h"
+
 // The Firebase you want to use for this app
 // You must setup Simple Login for the various authentication providers in Forge
 static NSString * const kFirebaseURL = @"https://<your-firebase>.firebaseio.com";
 
-// The app ID you setup in the facebook developer console
-static NSString * const kFacebookAppID = @"<your-facebook-app-id>";
-
 // The twitter API key you setup in the Twitter developer console
-static NSString * const kTwitterAPIKey = @"<your-twitter-app-api-key>";
+static NSString * const kTwitterAPIKey = @"<your-twitter-app-id>";
 
 // The Google client ID you setup in the Google developer console
 static NSString * const kGoogleClientID = @"<your-google-client-id>";
+
+// NOTE: You must configure Facebook in "Supporting Files/Simple Login Demo-Info.plist".
+// You need to set FacebookAppID, FacebookDisplayName, and configure a URL Scheme to match your App ID.
+// See https://developers.facebook.com/docs/ios/getting-started for more details.
+
 
 @interface SLViewController ()
 
@@ -39,11 +43,17 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 // A dialog that is displayed while logging in
 @property (nonatomic, strong) UIAlertView *loginProgressAlert;
 
+// The Firebase object
+@property (nonatomic, strong) Firebase *ref;
+
+// Twitter Auth Helper opbject
+@property (nonatomic, strong) TwitterAuthHelper *twitterAuthHelper;
+
 // The simpleLogin object that is used to authenticate against Firebase
 @property (nonatomic, strong) FirebaseSimpleLogin *simpleLogin;
 
 // The user currently authenticed with Firebase
-@property (nonatomic, strong) FAUser *currentUser;
+@property (nonatomic, strong) FAuthData *currentUser;
 
 @end
 
@@ -75,13 +85,13 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
                 forControlEvents:UIControlEventTouchUpInside];
 
     // create the simple login instance
-    Firebase *firebase = [[Firebase alloc] initWithUrl:kFirebaseURL];
-    self.simpleLogin = [[FirebaseSimpleLogin alloc] initWithRef:firebase];
+    self.ref = [[Firebase alloc] initWithUrl:kFirebaseURL];
+    self.simpleLogin = [[FirebaseSimpleLogin alloc] initWithRef:self.ref];
 }
 
 
 // sets the user and updates the UI
-- (void)updateUIAndSetCurrentUser:(FAUser *)currentUser
+- (void)updateUIAndSetCurrentUser:(FAuthData *)currentUser
 {
     // set the user
     self.currentUser = currentUser;
@@ -96,25 +106,19 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
     } else {
         // update the status label to show which user is logged in using which provider
         NSString *statusText;
-        switch (currentUser.provider) {
-            case FAProviderFacebook:
-                statusText = [NSString stringWithFormat:@"Logged in as %@ (Facebook)",
-                              currentUser.thirdPartyUserData[@"name"]];
-                break;
-            case FAProviderTwitter:
-                statusText = [NSString stringWithFormat:@"Logged in as %@ (Twitter)",
-                              currentUser.thirdPartyUserData[@"name"]];
-                break;
-            case FAProviderGoogle:
-                statusText = [NSString stringWithFormat:@"Logged in as %@ (Google+)",
-                              currentUser.thirdPartyUserData[@"name"]];
-                break;
-            case FAProviderAnonymous:
-                statusText = @"Logged in anonymously";
-                break;
-            default:
-                statusText = [NSString stringWithFormat:@"Logged in with unknown provider"];
-                break;
+        if ([currentUser.provider isEqualToString:@"facebook"]) {
+            statusText = [NSString stringWithFormat:@"Logged in as %@ (Facebook)",
+                          currentUser.providerData[@"displayName"]];
+        } else if ([currentUser.provider isEqualToString:@"twitter"]) {
+            statusText = [NSString stringWithFormat:@"Logged in as %@ (Twitter)",
+                          currentUser.providerData[@"username"]];
+        } else if ([currentUser.provider isEqualToString:@"google"]) {
+            statusText = [NSString stringWithFormat:@"Logged in as %@ (Google+)",
+                          currentUser.providerData[@"displayName"]];
+        } else if ([currentUser.provider isEqualToString:@"anonymous"]) {
+            statusText = @"Logged in anonymously";
+        } else {
+            statusText = [NSString stringWithFormat:@"Logged in with unknown provider"];
         }
         self.loginStatusLabel.text = statusText;
         self.loginStatusLabel.hidden = NO;
@@ -154,42 +158,48 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
     [alert show];
 }
 
-- (void(^)(NSError *, FAUser *))loginBlockForProviderName:(NSString *)providerName
+- (void(^)(NSError *, FAuthData *))loginBlockForProviderName:(NSString *)providerName
 {
     // this callback block can be used for every login method
-    return ^(NSError *error, FAUser *user) {
-        // make sure we are on the main queue
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // hide the login progress dialog
-            [self.loginProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
-            self.loginProgressAlert = nil;
-            if (error != nil) {
-                // there was an error authenticating with Firebase
-                NSLog(@"Error logging in to Firebase: %@", error);
-                // display an alert showing the error message
-                NSString *message = [NSString stringWithFormat:@"There was an error logging into Firebase using %@: %@",
-                                     providerName,
-                                     [error localizedDescription]];
-                [self showErrorAlertWithMessage:message];
-            } else {
-                // all is fine, set the current user and update UI
-                [self updateUIAndSetCurrentUser:user];
-            }
-        });
+    return ^(NSError *error, FAuthData *authData) {
+        // hide the login progress dialog
+        [self.loginProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
+        self.loginProgressAlert = nil;
+        if (error != nil) {
+            // there was an error authenticating with Firebase
+            NSLog(@"Error logging in to Firebase: %@", error);
+            // display an alert showing the error message
+            NSString *message = [NSString stringWithFormat:@"There was an error logging into Firebase using %@: %@",
+                                providerName,
+                                [error localizedDescription]];
+            [self showErrorAlertWithMessage:message];
+        } else {
+            // all is fine, set the current user and update UI
+            [self updateUIAndSetCurrentUser:authData];
+        }
     };
 }
 
 /*****************************
  *          FACEBOOK         *
  *****************************/
+
 - (void)facebookButtonPressed
 {
     [self showProgressAlert];
-    // login using Facebook
-    [self.simpleLogin loginToFacebookAppWithId:kFacebookAppID
-                                   permissions:@[@"email"]
-                                      audience:ACFacebookAudienceOnlyMe
-                           withCompletionBlock:[self loginBlockForProviderName:@"Facebook"]];
+
+    // Open a session showing the user the login UI
+    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile"]
+                                       allowLoginUI:YES
+                                  completionHandler:
+     ^(FBSession *session, FBSessionState state, NSError *error) {
+         if (error) {
+             NSLog(@"Facebook login failed. Error: %@", error);
+         } else if (state == FBSessionStateOpen) {
+             NSString *accessToken = session.accessTokenData.accessToken;
+             [self.ref authWithOAuthProvider:@"facebook" token:accessToken withCompletionBlock:[self loginBlockForProviderName:@"Facebook"]];
+         }
+     }];
 }
 
 /*****************************
@@ -220,7 +230,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
         [self showErrorAlertWithMessage:message];
     } else {
         // We successfully obtained an OAuth token, authenticate on Firebase with it
-        [self.simpleLogin loginWithGoogleWithAccessToken:auth.accessToken withCompletionBlock:[self loginBlockForProviderName:@"Google+"]];
+        [self.ref authWithOAuthProvider:@"google" token:auth.accessToken withCompletionBlock:[self loginBlockForProviderName:@"Google+"]];
     }
 }
 
@@ -229,15 +239,69 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
  *****************************/
 - (void)twitterButtonPressed
 {
-    [self showProgressAlert];
-    [self.simpleLogin loginToTwitterAppWithId:kTwitterAPIKey
-                      multipleAccountsHandler:^int(NSArray *usernames) {
-                          // here you could display a dialog letting the user choose
-                          // for simplicity we just choose the first
-                          return 0;
-                      }
-                          withCompletionBlock:[self loginBlockForProviderName:@"Twitter"]];
+    self.twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:self.ref apiKey:kTwitterAPIKey];
+    [self.twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
+        if (error) {
+            NSString *message = [NSString stringWithFormat:@"There was an error logging into Twitter: %@", [error localizedDescription]];
+            [self showErrorAlertWithMessage:message];
+        } else {
+            // here you could display a dialog letting the user choose
+            // for simplicity we just choose the first
+            [self showProgressAlert];
+            [self.twitterAuthHelper authenticateAccount:[accounts firstObject]
+                                           withCallback:[self loginBlockForProviderName:@"Twitter"]];
+            
+            // If you wanted something more complicated, comment the above line out, and use the below line instead.
+            // [self twitterHandleAccounts:accounts];
+        }
+    }];
 }
+
+/*****************************
+ *      ADV TWITTER STUFF    *
+ *****************************/
+- (void)twitterHandleAccounts:(NSArray *)accounts
+{
+    // Handle the case based on how many twitter accounts are registered with the phone.
+    switch ([accounts count]) {
+        case 0:
+            // There is currently no Twitter account on the device.
+            break;
+        case 1:
+            // Single user system, go straight to login
+            [self.twitterAuthHelper authenticateAccount:[accounts firstObject]
+                                           withCallback:[self loginBlockForProviderName:@"Twitter"]];
+            break;
+        default:
+            // Handle multiple users by showing action sheet
+            [self twitterShowAccountsSheet:accounts];
+            break;
+    }
+}
+
+// For this, you'll need to make sure that your ViewController is a UIActionSheetDelegate.
+- (void)twitterShowAccountsSheet:(NSArray *)accounts
+{
+    UIActionSheet *selectUserActionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Twitter Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+    for (ACAccount *account in accounts) {
+        [selectUserActionSheet addButtonWithTitle:[account username]];
+    }
+    selectUserActionSheet.cancelButtonIndex = [selectUserActionSheet addButtonWithTitle:@"Cancel"];
+    [selectUserActionSheet showInView:self.view];
+}
+
+// Delegate to handle Twitter action sheet
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *currentTwitterHandle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
+    for (ACAccount *account in self.twitterAuthHelper.accounts) {
+        if ([currentTwitterHandle isEqualToString:account.username]) {
+            [self.twitterAuthHelper authenticateAccount:account
+                                           withCallback:[self loginBlockForProviderName:@"Twitter"]];
+        }
+    }
+}
+
 
 /*****************************
  *         ANONYMOUS         *
@@ -245,7 +309,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 - (void)anonymousButtonPressed
 {
     [self showProgressAlert];
-    [self.simpleLogin loginAnonymouslywithCompletionBlock:[self loginBlockForProviderName:@"Anonymous"]];
+    [self.ref authAnonymouslyWithCompletionBlock:[self loginBlockForProviderName:@"Anonymous"]];
 }
 
 
