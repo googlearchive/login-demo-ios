@@ -83,10 +83,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
                 forControlEvents:UIControlEventTouchUpInside];
     
     // make sure we have a Firebase url
-    
-    if ([@"https://<your-firebase>.firebaseio.com" isEqualToString:kFirebaseURL]) {
-        NSLog(@"Please set kFirebaseURL to your Firebase's URL.");
-    } else {
+    if ([self firebaseIsSetup]) {
         self.ref = [[Firebase alloc] initWithUrl:kFirebaseURL];
     }
 }
@@ -183,11 +180,68 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 }
 
 /*****************************
+ *          Checks Setup
+ * These methods check that the necessary constants are set up properly.
+ *****************************/
+
+- (BOOL)facebookIsSetup
+{
+    NSString *facebookAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"FacebookAppID"];
+    NSString *facebookDisplayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"FacebookDisplayName"];
+    BOOL canOpenFacebook =[[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"fb%@://", facebookAppId]]];
+    
+    if ([@"<YOUR FACEBOOK APP ID>" isEqualToString:facebookAppId] ||
+        [@"<YOUR FACEBOOK APP DISPLAY NAME>" isEqualToString:facebookDisplayName] || !canOpenFacebook) {
+        [self showErrorAlertWithMessage:@"Please set FacebookAppID, FacebookDisplayName, and\nURL types > Url Schemes in `Supporting Files/Info.plist`"];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)googleIsSetup
+{
+    if ([@"<your-google-client-id>" isEqualToString:kGoogleClientID]) {
+        [self showErrorAlertWithMessage:@"Please set kGoogleClientId to your Google Client ID in ViewController.m"];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)twitterIsSetup
+{
+    if ([@"<your-twitter-app-id>" isEqualToString:kTwitterAPIKey]) {
+        [self showErrorAlertWithMessage:@"Please set kTwitterAPIKey to your Twitter API Key in ViewController.m"];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)firebaseIsSetup
+{
+    if ([@"https://<your-firebase>.firebaseio.com" isEqualToString:kFirebaseURL]) {
+        [self showErrorAlertWithMessage:@"Please set kFirebaseURL to your Firebase's URL in ViewController.m"];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+/*****************************
  *          FACEBOOK         *
  *****************************/
 
 - (void)facebookButtonPressed
 {
+    if ([self facebookIsSetup]) {
+        [self facebookLogin];
+    }
+}
+
+- (void)facebookLogin {
+    
     [self showProgressAlert];
     
     // Open a session showing the user the login UI
@@ -208,6 +262,13 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
  *          GOOGLE+          *
  *****************************/
 - (void)googleButtonPressed
+{
+    if ([self googleIsSetup]) {
+        [self googleLogin];
+    }
+}
+
+- (void)googleLogin
 {
     [self showProgressAlert];
     // use the Google+ SDK to get an OAuth token
@@ -240,6 +301,13 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
  *          TWITTER          *
  *****************************/
 - (void)twitterButtonPressed
+{
+    if ([self twitterIsSetup]) {
+        [self twitterLogin];
+    }
+}
+
+- (void)twitterLogin
 {
     self.twitterAuthHelper = [[TwitterAuthHelper alloc] initWithFirebaseRef:self.ref apiKey:kTwitterAPIKey];
     [self.twitterAuthHelper selectTwitterAccountWithCallback:^(NSError *error, NSArray *accounts) {
@@ -310,8 +378,10 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
  *****************************/
 - (void)anonymousButtonPressed
 {
-    [self showProgressAlert];
-    [self.ref authAnonymouslyWithCompletionBlock:[self loginBlockForProviderName:@"Anonymous"]];
+    if ([self firebaseIsSetup]) {
+        [self showProgressAlert];
+        [self.ref authAnonymouslyWithCompletionBlock:[self loginBlockForProviderName:@"Anonymous"]];
+    }
 }
 
 
