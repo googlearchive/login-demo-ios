@@ -8,10 +8,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.firebase.Login-Demo</string>
+			<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.firebase.Login-Demo</string>
+				<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
 				<string>fb&lt;YOUR FACEBOOK APP ID&gt;</string>
 			</array>
 		</dict>
