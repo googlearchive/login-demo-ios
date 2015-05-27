@@ -2,18 +2,34 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Dummy</key>
+	<string>NOTE: Expand the URL types below and configure &quot;&lt;YOUR FACEBOOK APP ID&gt;&quot;</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.firebase.Login-Demo</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.firebase.Login-Demo</string>
+				<string>fb&lt;YOUR FACEBOOK APP ID&gt;</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>&lt;YOUR FACEBOOK APP ID&gt;</string>
+	<key>FacebookDisplayName</key>
+	<string>&lt;YOUR FACEBOOK APP DISPLAY NAME&gt;</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
+	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.firebase.simplelogindemo</string>
+	<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -21,12 +37,12 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>UIMainStoryboardFile~ipad</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
@@ -44,26 +60,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>FacebookAppID</key>
-	<string>&lt;YOUR FACEBOOK APP ID&gt;</string>
-	<key>FacebookDisplayName</key>
-	<string>&lt;YOUR FACEBOOK APP DISPLAY NAME&gt;</string>
-	<key>Dummy</key>
-	<string>NOTE: You need to expand the URL types below and configure &quot;&lt;YOUR FACEBOOK APP ID&gt;&quot;!</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.firebase.simplelogindemo</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.firebase.simplelogindemo</string>
-				<string>fb&lt;YOUR FACEBOOK APP ID&gt;</string>
-			</array>
-		</dict>
 	</array>
 </dict>
 </plist>
