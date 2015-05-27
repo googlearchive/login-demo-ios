@@ -1,0 +1,562 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C7DC75119DBB694002DB448 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7DC75019DBB694002DB448 /* FacebookSDK.framework */; };
+		5F87976A19DB6EA9009383AE /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F87976919DB6EA9009383AE /* TwitterAuthHelper.m */; };
+		FB91C84219991E3F00AB077F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84119991E3F00AB077F /* Foundation.framework */; };
+		FB91C84419991E3F00AB077F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84319991E3F00AB077F /* CoreGraphics.framework */; };
+		FB91C84619991E3F00AB077F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84519991E3F00AB077F /* UIKit.framework */; };
+		FB91C84C19991E3F00AB077F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB91C84A19991E3F00AB077F /* InfoPlist.strings */; };
+		FB91C84E19991E3F00AB077F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB91C84D19991E3F00AB077F /* main.m */; };
+		FB91C85219991E3F00AB077F /* SLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB91C85119991E3F00AB077F /* SLAppDelegate.m */; };
+		FB91C85519991E3F00AB077F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB91C85319991E3F00AB077F /* Main.storyboard */; };
+		FB91C85B19991E3F00AB077F /* SLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB91C85A19991E3F00AB077F /* SLViewController.m */; };
+		FB91C85D19991E3F00AB077F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB91C85C19991E3F00AB077F /* Images.xcassets */; };
+		FB91C86419991E3F00AB077F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C86319991E3F00AB077F /* XCTest.framework */; };
+		FB91C86519991E3F00AB077F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84119991E3F00AB077F /* Foundation.framework */; };
+		FB91C86619991E3F00AB077F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C84519991E3F00AB077F /* UIKit.framework */; };
+		FB91C86E19991E3F00AB077F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB91C86C19991E3F00AB077F /* InfoPlist.strings */; };
+		FB91C87019991E3F00AB077F /* Simple_Login_DemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB91C86F19991E3F00AB077F /* Simple_Login_DemoTests.m */; };
+		FB91C87A19991F0200AB077F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C87919991F0200AB077F /* Social.framework */; };
+		FB91C87C19991F0E00AB077F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C87B19991F0E00AB077F /* Accounts.framework */; };
+		FB91C87E19991FF200AB077F /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C87D19991FF200AB077F /* Firebase.framework */; };
+		FB91C880199920DE00AB077F /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C87F199920DE00AB077F /* libicucore.dylib */; };
+		FB91C882199920E900AB077F /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C881199920E900AB077F /* libc++.dylib */; };
+		FB91C884199920F000AB077F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C883199920F000AB077F /* CFNetwork.framework */; };
+		FB91C886199920F600AB077F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C885199920F600AB077F /* Security.framework */; };
+		FB91C888199920FD00AB077F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C887199920FD00AB077F /* SystemConfiguration.framework */; };
+		FB91C88A1999291F00AB077F /* FirebaseSimpleLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C8891999291F00AB077F /* FirebaseSimpleLogin.framework */; };
+		FB91C88E199BAD4000AB077F /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C88C199BAD4000AB077F /* GoogleOpenSource.framework */; };
+		FB91C88F199BAD4000AB077F /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C88D199BAD4000AB077F /* GooglePlus.framework */; };
+		FB91C893199BB0E900AB077F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C892199BB0E900AB077F /* AddressBook.framework */; };
+		FB91C895199BB10700AB077F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C894199BB10700AB077F /* MediaPlayer.framework */; };
+		FB91C897199BB11400AB077F /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C896199BB11400AB077F /* AssetsLibrary.framework */; };
+		FB91C899199BB11C00AB077F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C898199BB11C00AB077F /* CoreLocation.framework */; };
+		FB91C89B199BB12500AB077F /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB91C89A199BB12500AB077F /* CoreMotion.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FB91C86719991E3F00AB077F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FB91C83619991E3F00AB077F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB91C83D19991E3F00AB077F;
+			remoteInfo = "Simple Login Demo";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C7DC75019DBB694002DB448 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = sdk/FacebookSDK.framework; sourceTree = "<group>"; };
+		5F87976819DB6E8F009383AE /* TwitterAuthHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
+		5F87976919DB6EA9009383AE /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
+		FB91C83E19991E3F00AB077F /* Simple Login Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Login Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB91C84119991E3F00AB077F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FB91C84319991E3F00AB077F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FB91C84519991E3F00AB077F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FB91C84919991E3F00AB077F /* Simple Login Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Simple Login Demo-Info.plist"; sourceTree = "<group>"; };
+		FB91C84B19991E3F00AB077F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FB91C84D19991E3F00AB077F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FB91C84F19991E3F00AB077F /* Simple Login Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simple Login Demo-Prefix.pch"; sourceTree = "<group>"; };
+		FB91C85019991E3F00AB077F /* SLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLAppDelegate.h; sourceTree = "<group>"; };
+		FB91C85119991E3F00AB077F /* SLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAppDelegate.m; sourceTree = "<group>"; };
+		FB91C85419991E3F00AB077F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FB91C85919991E3F00AB077F /* SLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLViewController.h; sourceTree = "<group>"; };
+		FB91C85A19991E3F00AB077F /* SLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLViewController.m; sourceTree = "<group>"; };
+		FB91C85C19991E3F00AB077F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FB91C86219991E3F00AB077F /* Simple Login DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Simple Login DemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB91C86319991E3F00AB077F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		FB91C86B19991E3F00AB077F /* Simple Login DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Simple Login DemoTests-Info.plist"; sourceTree = "<group>"; };
+		FB91C86D19991E3F00AB077F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FB91C86F19991E3F00AB077F /* Simple_Login_DemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Simple_Login_DemoTests.m; sourceTree = "<group>"; };
+		FB91C87919991F0200AB077F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		FB91C87B19991F0E00AB077F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		FB91C87D19991FF200AB077F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = sdk/Firebase.framework; sourceTree = "<group>"; };
+		FB91C87F199920DE00AB077F /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		FB91C881199920E900AB077F /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		FB91C883199920F000AB077F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		FB91C885199920F600AB077F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FB91C887199920FD00AB077F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FB91C8891999291F00AB077F /* FirebaseSimpleLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseSimpleLogin.framework; path = sdk/FirebaseSimpleLogin.framework; sourceTree = "<group>"; };
+		FB91C88C199BAD4000AB077F /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = "sdk/google-plus-ios-sdk-1.7.0/GoogleOpenSource.framework"; sourceTree = "<group>"; };
+		FB91C88D199BAD4000AB077F /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = "sdk/google-plus-ios-sdk-1.7.0/GooglePlus.framework"; sourceTree = "<group>"; };
+		FB91C892199BB0E900AB077F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		FB91C894199BB10700AB077F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		FB91C896199BB11400AB077F /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		FB91C898199BB11C00AB077F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		FB91C89A199BB12500AB077F /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FB91C83B19991E3F00AB077F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB91C89B199BB12500AB077F /* CoreMotion.framework in Frameworks */,
+				4C7DC75119DBB694002DB448 /* FacebookSDK.framework in Frameworks */,
+				FB91C899199BB11C00AB077F /* CoreLocation.framework in Frameworks */,
+				FB91C897199BB11400AB077F /* AssetsLibrary.framework in Frameworks */,
+				FB91C895199BB10700AB077F /* MediaPlayer.framework in Frameworks */,
+				FB91C893199BB0E900AB077F /* AddressBook.framework in Frameworks */,
+				FB91C888199920FD00AB077F /* SystemConfiguration.framework in Frameworks */,
+				FB91C88A1999291F00AB077F /* FirebaseSimpleLogin.framework in Frameworks */,
+				FB91C88E199BAD4000AB077F /* GoogleOpenSource.framework in Frameworks */,
+				FB91C886199920F600AB077F /* Security.framework in Frameworks */,
+				FB91C884199920F000AB077F /* CFNetwork.framework in Frameworks */,
+				FB91C882199920E900AB077F /* libc++.dylib in Frameworks */,
+				FB91C880199920DE00AB077F /* libicucore.dylib in Frameworks */,
+				FB91C87C19991F0E00AB077F /* Accounts.framework in Frameworks */,
+				FB91C87E19991FF200AB077F /* Firebase.framework in Frameworks */,
+				FB91C88F199BAD4000AB077F /* GooglePlus.framework in Frameworks */,
+				FB91C87A19991F0200AB077F /* Social.framework in Frameworks */,
+				FB91C84419991E3F00AB077F /* CoreGraphics.framework in Frameworks */,
+				FB91C84619991E3F00AB077F /* UIKit.framework in Frameworks */,
+				FB91C84219991E3F00AB077F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB91C85F19991E3F00AB077F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB91C86419991E3F00AB077F /* XCTest.framework in Frameworks */,
+				FB91C86619991E3F00AB077F /* UIKit.framework in Frameworks */,
+				FB91C86519991E3F00AB077F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FB91C83519991E3F00AB077F = {
+			isa = PBXGroup;
+			children = (
+				FB91C84719991E3F00AB077F /* Simple Login Demo */,
+				FB91C86919991E3F00AB077F /* Simple Login DemoTests */,
+				FB91C84019991E3F00AB077F /* Frameworks */,
+				FB91C83F19991E3F00AB077F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FB91C83F19991E3F00AB077F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FB91C83E19991E3F00AB077F /* Simple Login Demo.app */,
+				FB91C86219991E3F00AB077F /* Simple Login DemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB91C84019991E3F00AB077F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB91C89A199BB12500AB077F /* CoreMotion.framework */,
+				FB91C898199BB11C00AB077F /* CoreLocation.framework */,
+				FB91C896199BB11400AB077F /* AssetsLibrary.framework */,
+				FB91C894199BB10700AB077F /* MediaPlayer.framework */,
+				FB91C892199BB0E900AB077F /* AddressBook.framework */,
+				FB91C88C199BAD4000AB077F /* GoogleOpenSource.framework */,
+				FB91C88D199BAD4000AB077F /* GooglePlus.framework */,
+				FB91C8891999291F00AB077F /* FirebaseSimpleLogin.framework */,
+				FB91C887199920FD00AB077F /* SystemConfiguration.framework */,
+				FB91C885199920F600AB077F /* Security.framework */,
+				FB91C883199920F000AB077F /* CFNetwork.framework */,
+				FB91C881199920E900AB077F /* libc++.dylib */,
+				FB91C87F199920DE00AB077F /* libicucore.dylib */,
+				FB91C87D19991FF200AB077F /* Firebase.framework */,
+				FB91C87B19991F0E00AB077F /* Accounts.framework */,
+				FB91C87919991F0200AB077F /* Social.framework */,
+				FB91C84119991E3F00AB077F /* Foundation.framework */,
+				FB91C84319991E3F00AB077F /* CoreGraphics.framework */,
+				FB91C84519991E3F00AB077F /* UIKit.framework */,
+				FB91C86319991E3F00AB077F /* XCTest.framework */,
+				4C7DC75019DBB694002DB448 /* FacebookSDK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB91C84719991E3F00AB077F /* Simple Login Demo */ = {
+			isa = PBXGroup;
+			children = (
+				FB91C85019991E3F00AB077F /* SLAppDelegate.h */,
+				FB91C85119991E3F00AB077F /* SLAppDelegate.m */,
+				FB91C85319991E3F00AB077F /* Main.storyboard */,
+				FB91C85919991E3F00AB077F /* SLViewController.h */,
+				FB91C85A19991E3F00AB077F /* SLViewController.m */,
+				FB91C85C19991E3F00AB077F /* Images.xcassets */,
+				FB91C84819991E3F00AB077F /* Supporting Files */,
+				5F87976819DB6E8F009383AE /* TwitterAuthHelper.h */,
+				5F87976919DB6EA9009383AE /* TwitterAuthHelper.m */,
+			);
+			path = "Simple Login Demo";
+			sourceTree = "<group>";
+		};
+		FB91C84819991E3F00AB077F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FB91C84919991E3F00AB077F /* Simple Login Demo-Info.plist */,
+				FB91C84A19991E3F00AB077F /* InfoPlist.strings */,
+				FB91C84D19991E3F00AB077F /* main.m */,
+				FB91C84F19991E3F00AB077F /* Simple Login Demo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FB91C86919991E3F00AB077F /* Simple Login DemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				FB91C86F19991E3F00AB077F /* Simple_Login_DemoTests.m */,
+				FB91C86A19991E3F00AB077F /* Supporting Files */,
+			);
+			path = "Simple Login DemoTests";
+			sourceTree = "<group>";
+		};
+		FB91C86A19991E3F00AB077F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FB91C86B19991E3F00AB077F /* Simple Login DemoTests-Info.plist */,
+				FB91C86C19991E3F00AB077F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB91C83D19991E3F00AB077F /* Simple Login Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB91C87319991E3F00AB077F /* Build configuration list for PBXNativeTarget "Simple Login Demo" */;
+			buildPhases = (
+				FB91C83A19991E3F00AB077F /* Sources */,
+				FB91C83B19991E3F00AB077F /* Frameworks */,
+				FB91C83C19991E3F00AB077F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Simple Login Demo";
+			productName = "Simple Login Demo";
+			productReference = FB91C83E19991E3F00AB077F /* Simple Login Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FB91C86119991E3F00AB077F /* Simple Login DemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB91C87619991E3F00AB077F /* Build configuration list for PBXNativeTarget "Simple Login DemoTests" */;
+			buildPhases = (
+				FB91C85E19991E3F00AB077F /* Sources */,
+				FB91C85F19991E3F00AB077F /* Frameworks */,
+				FB91C86019991E3F00AB077F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB91C86819991E3F00AB077F /* PBXTargetDependency */,
+			);
+			name = "Simple Login DemoTests";
+			productName = "Simple Login DemoTests";
+			productReference = FB91C86219991E3F00AB077F /* Simple Login DemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FB91C83619991E3F00AB077F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SL;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Firebase;
+				TargetAttributes = {
+					FB91C86119991E3F00AB077F = {
+						TestTargetID = FB91C83D19991E3F00AB077F;
+					};
+				};
+			};
+			buildConfigurationList = FB91C83919991E3F00AB077F /* Build configuration list for PBXProject "Simple Login Demo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FB91C83519991E3F00AB077F;
+			productRefGroup = FB91C83F19991E3F00AB077F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FB91C83D19991E3F00AB077F /* Simple Login Demo */,
+				FB91C86119991E3F00AB077F /* Simple Login DemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FB91C83C19991E3F00AB077F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB91C85D19991E3F00AB077F /* Images.xcassets in Resources */,
+				FB91C85519991E3F00AB077F /* Main.storyboard in Resources */,
+				FB91C84C19991E3F00AB077F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB91C86019991E3F00AB077F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB91C86E19991E3F00AB077F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FB91C83A19991E3F00AB077F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB91C84E19991E3F00AB077F /* main.m in Sources */,
+				FB91C85B19991E3F00AB077F /* SLViewController.m in Sources */,
+				FB91C85219991E3F00AB077F /* SLAppDelegate.m in Sources */,
+				5F87976A19DB6EA9009383AE /* TwitterAuthHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB91C85E19991E3F00AB077F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB91C87019991E3F00AB077F /* Simple_Login_DemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FB91C86819991E3F00AB077F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FB91C83D19991E3F00AB077F /* Simple Login Demo */;
+			targetProxy = FB91C86719991E3F00AB077F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FB91C84A19991E3F00AB077F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB91C84B19991E3F00AB077F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FB91C85319991E3F00AB077F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB91C85419991E3F00AB077F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FB91C86C19991E3F00AB077F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB91C86D19991E3F00AB077F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FB91C87119991E3F00AB077F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FB91C87219991E3F00AB077F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FB91C87419991E3F00AB077F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sdk",
+					"$(PROJECT_DIR)/sdk/google-plus-ios-sdk-1.7.0",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple Login Demo/Simple Login Demo-Prefix.pch";
+				INFOPLIST_FILE = "Simple Login Demo/Simple Login Demo-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FB91C87519991E3F00AB077F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sdk",
+					"$(PROJECT_DIR)/sdk/google-plus-ios-sdk-1.7.0",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple Login Demo/Simple Login Demo-Prefix.pch";
+				INFOPLIST_FILE = "Simple Login Demo/Simple Login Demo-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		FB91C87719991E3F00AB077F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Simple Login Demo.app/Simple Login Demo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple Login Demo/Simple Login Demo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Simple Login DemoTests/Simple Login DemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		FB91C87819991E3F00AB077F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Simple Login Demo.app/Simple Login Demo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple Login Demo/Simple Login Demo-Prefix.pch";
+				INFOPLIST_FILE = "Simple Login DemoTests/Simple Login DemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FB91C83919991E3F00AB077F /* Build configuration list for PBXProject "Simple Login Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB91C87119991E3F00AB077F /* Debug */,
+				FB91C87219991E3F00AB077F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB91C87319991E3F00AB077F /* Build configuration list for PBXNativeTarget "Simple Login Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB91C87419991E3F00AB077F /* Debug */,
+				FB91C87519991E3F00AB077F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB91C87619991E3F00AB077F /* Build configuration list for PBXNativeTarget "Simple Login DemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB91C87719991E3F00AB077F /* Debug */,
+				FB91C87819991E3F00AB077F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FB91C83619991E3F00AB077F /* Project object */;
+}
