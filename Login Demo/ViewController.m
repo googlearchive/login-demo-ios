@@ -1,6 +1,6 @@
 //
-//  SLViewController.m
-//  Simple Login Demo
+//  ViewController.m
+//  Login Demo
 //
 //  Created by Jonny Dimond on 8/11/14.
 //  Copyright (c) 2014 Firebase. All rights reserved.
@@ -17,7 +17,7 @@
 #import "TwitterAuthHelper.h"
 
 // The Firebase you want to use for this app
-// You must setup Simple Login for the various authentication providers in Forge
+// You must setup Firebase Login for the various authentication providers in the Dashboard under Login & Auth.
 static NSString * const kFirebaseURL = @"https://<your-firebase>.firebaseio.com";
 
 // The twitter API key you setup in the Twitter developer console
@@ -82,7 +82,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
                           action:@selector(logoutButtonPressed)
                 forControlEvents:UIControlEventTouchUpInside];
     
-    // create the simple login instance
+    // make sure we have a Firebase url
     
     if ([@"https://<your-firebase>.firebaseio.com" isEqualToString:kFirebaseURL]) {
         NSLog(@"Please set kFirebaseURL to your Firebase's URL.");
