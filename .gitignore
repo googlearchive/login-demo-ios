@@ -18,7 +18,4 @@ xcuserdata
 *.moved-aside
 *.xccheckout
 .idea
-
-# local
-/sdk
-
+Pods/

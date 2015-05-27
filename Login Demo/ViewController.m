@@ -6,12 +6,13 @@
 //  Copyright (c) 2014 Firebase. All rights reserved.
 //
 
-#import "SLViewController.h"
+#import "ViewController.h"
 
 #import <Accounts/Accounts.h>
 #import <Firebase/Firebase.h>
-#import <FirebaseSimpleLogin/FirebaseSimpleLogin.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #import "TwitterAuthHelper.h"
 
@@ -25,12 +26,12 @@ static NSString * const kTwitterAPIKey = @"<your-twitter-app-id>";
 // The Google client ID you setup in the Google developer console
 static NSString * const kGoogleClientID = @"<your-google-client-id>";
 
-// NOTE: You must configure Facebook in "Supporting Files/Simple Login Demo-Info.plist".
+// NOTE: You must configure Facebook in "Supporting Files/Info.plist".
 // You need to set FacebookAppID, FacebookDisplayName, and configure a URL Scheme to match your App ID.
 // See https://developers.facebook.com/docs/ios/getting-started for more details.
 
 
-@interface SLViewController ()
+@interface ViewController ()
 
 // The login buttons and status labels
 @property (nonatomic, strong) IBOutlet UIButton *facebookLoginButton;
@@ -43,21 +44,18 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 // A dialog that is displayed while logging in
 @property (nonatomic, strong) UIAlertView *loginProgressAlert;
 
-// The Firebase object
+// The Firebase object. We use this to authenticate.
 @property (nonatomic, strong) Firebase *ref;
 
 // Twitter Auth Helper opbject
 @property (nonatomic, strong) TwitterAuthHelper *twitterAuthHelper;
-
-// The simpleLogin object that is used to authenticate against Firebase
-@property (nonatomic, strong) FirebaseSimpleLogin *simpleLogin;
 
 // The user currently authenticed with Firebase
 @property (nonatomic, strong) FAuthData *currentUser;
 
 @end
 
-@implementation SLViewController
+@implementation ViewController
 
 - (void)viewDidLoad
 {
@@ -83,10 +81,14 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
     [self.logoutButton addTarget:self
                           action:@selector(logoutButtonPressed)
                 forControlEvents:UIControlEventTouchUpInside];
-
+    
     // create the simple login instance
-    self.ref = [[Firebase alloc] initWithUrl:kFirebaseURL];
-    self.simpleLogin = [[FirebaseSimpleLogin alloc] initWithRef:self.ref];
+    
+    if ([@"https://<your-firebase>.firebaseio.com" isEqualToString:kFirebaseURL]) {
+        NSLog(@"Please set kFirebaseURL to your Firebase's URL.");
+    } else {
+        self.ref = [[Firebase alloc] initWithUrl:kFirebaseURL];
+    }
 }
 
 
@@ -135,7 +137,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 - (void)logoutButtonPressed
 {
     // logout of Firebase and set the current user to nil
-    [self.simpleLogin logout];
+    [self.ref unauth];
     [self updateUIAndSetCurrentUser:nil];
 }
 
@@ -170,8 +172,8 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
             NSLog(@"Error logging in to Firebase: %@", error);
             // display an alert showing the error message
             NSString *message = [NSString stringWithFormat:@"There was an error logging into Firebase using %@: %@",
-                                providerName,
-                                [error localizedDescription]];
+                                 providerName,
+                                 [error localizedDescription]];
             [self showErrorAlertWithMessage:message];
         } else {
             // all is fine, set the current user and update UI
@@ -187,19 +189,19 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 - (void)facebookButtonPressed
 {
     [self showProgressAlert];
-
+    
     // Open a session showing the user the login UI
-    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile"]
-                                       allowLoginUI:YES
-                                  completionHandler:
-     ^(FBSession *session, FBSessionState state, NSError *error) {
-         if (error) {
-             NSLog(@"Facebook login failed. Error: %@", error);
-         } else if (state == FBSessionStateOpen) {
-             NSString *accessToken = session.accessTokenData.accessToken;
-             [self.ref authWithOAuthProvider:@"facebook" token:accessToken withCompletionBlock:[self loginBlockForProviderName:@"Facebook"]];
-         }
-     }];
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    
+    [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        if (error) {
+            NSLog(@"Facebook login failed. Error: %@", error);
+        } else if (result.isCancelled) {
+            NSLog(@"Facebook login got cancelled.");
+        } else if ([FBSDKAccessToken currentAccessToken]) {
+            [self.ref authWithOAuthProvider:@"facebook" token:[[FBSDKAccessToken currentAccessToken] tokenString] withCompletionBlock:[self loginBlockForProviderName:@"Facebook"]];
+        }
+    }];
 }
 
 /*****************************
@@ -212,7 +214,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
     signIn.shouldFetchGooglePlusUser = YES;
     signIn.clientID = kGoogleClientID;
-    signIn.scopes = @[ kGTLAuthScopePlusLogin ];
+    signIn.scopes = @[];
     signIn.delegate = self;
     // authenticate will do a callback to finishedWithAuth:error:
     [signIn authenticate];
