@@ -1,13 +1,10 @@
 //
 //  TwitterAuthHelper.h
-//  Simple Login Demo
+//  Login Demo
 //
 //  Created by Katherine Fang on 9/30/14.
 //  Copyright (c) 2014 Firebase. All rights reserved.
 //
-
-#ifndef Simple_Login_Demo_TwitterAuthHelper_h
-#define Simple_Login_Demo_TwitterAuthHelper_h
 
 #import <Firebase/Firebase.h>
 
@@ -32,5 +29,3 @@ typedef NS_ENUM(NSInteger, AuthHelperError) {
     AuthHelperErrorAccountAccessDenied = -1,
     AuthHelperErrorOAuthTokenRequestDenied = -2
 };
-
-#endif
