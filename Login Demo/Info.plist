@@ -2,24 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Dummy</key>
-	<string>NOTE: Expand the URL types below and configure &quot;&lt;YOUR FACEBOOK APP ID&gt;&quot;</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
-				<string>fb&lt;YOUR FACEBOOK APP ID&gt;</string>
-			</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-	<string>&lt;YOUR FACEBOOK APP ID&gt;</string>
-	<key>FacebookDisplayName</key>
-	<string>&lt;YOUR FACEBOOK APP DISPLAY NAME&gt;</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -36,8 +18,47 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>FacebookURL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb&lt;YOUR FACEBOOK APP ID&gt;</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>GoogleURL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>&lt;YOUR GOOGLE REVERSE CLIENT ID&gt;</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Dummy</key>
+	<string>NOTE: Expand the URL types below and configure &quot;&lt;YOUR FACEBOOK APP ID&gt;&quot;</string>
+	<key>FacebookAppID</key>
+	<string>&lt;YOUR FACEBOOK APP ID&gt;</string>
+	<key>FacebookDisplayName</key>
+	<string>&lt;YOUR FACEBOOK APP DISPLAY NAME&gt;</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

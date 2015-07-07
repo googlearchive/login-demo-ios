@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <GooglePlus/GooglePlus.h>
+#import <Google/SignIn.h>
+#import <Accounts/Accounts.h>
+#import <Firebase/Firebase.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-@interface ViewController : UIViewController<GPPSignInDelegate, UIActionSheetDelegate>
+@interface ViewController : UIViewController<UIActionSheetDelegate, GIDSignInDelegate, GIDSignInUIDelegate>
 
 @end
 

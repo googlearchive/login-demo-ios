@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <GooglePlus/GooglePlus.h>
 
 @interface AppDelegate ()
 
@@ -19,6 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    // Configure Google SignIn
+    NSError* configureError;
+    [[GGLContext sharedInstance] configureWithError: &configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+
+    // Return successful Facebook SDK Install
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }
@@ -54,11 +59,10 @@
                                                     sourceApplication:sourceApplication
                                                            annotation:annotation];
     } else {
-        return [GPPURLHandler handleURL:url
-                      sourceApplication:sourceApplication
-                             annotation:annotation];
+        return [[GIDSignIn sharedInstance] handleURL:url
+                            sourceApplication:sourceApplication
+                                   annotation:annotation];
     }
 }
-
 
 @end

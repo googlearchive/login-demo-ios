@@ -7,24 +7,18 @@
 //
 
 #import "ViewController.h"
-
-#import <Accounts/Accounts.h>
-#import <Firebase/Firebase.h>
-#import <GoogleOpenSource/GoogleOpenSource.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-
 #import "TwitterAuthHelper.h"
 
 // The Firebase you want to use for this app
 // You must setup Firebase Login for the various authentication providers in the Dashboard under Login & Auth.
-static NSString * const kFirebaseURL = @"https://<your-firebase>.firebaseio.com";
+static NSString * const kFirebaseURL = @"https://<your-firebase-database>.firebaseio.com";
 
 // The twitter API key you setup in the Twitter developer console
-static NSString * const kTwitterAPIKey = @"<your-twitter-app-id>";
+static NSString * const kTwitterAPIKey = @"<your-twitter-api-key>";
 
-// The Google client ID you setup in the Google developer console
-static NSString * const kGoogleClientID = @"<your-google-client-id>";
+// NOTE: You must configure Google by dragging "GoogleService-Info.plist" to "Supporting Files".
+// You must also configure a URL Schemes to match to match the REVERSED_CLIENT_ID and Bundle Identifier.
+// See https://developers.google.com/identity/sign-in/ios/start-integrating for more details.
 
 // NOTE: You must configure Facebook in "Supporting Files/Info.plist".
 // You need to set FacebookAppID, FacebookDisplayName, and configure a URL Scheme to match your App ID.
@@ -112,7 +106,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
             statusText = [NSString stringWithFormat:@"Logged in as %@ (Twitter)",
                           currentUser.providerData[@"username"]];
         } else if ([currentUser.provider isEqualToString:@"google"]) {
-            statusText = [NSString stringWithFormat:@"Logged in as %@ (Google+)",
+            statusText = [NSString stringWithFormat:@"Logged in as %@ (Google)",
                           currentUser.providerData[@"displayName"]];
         } else if ([currentUser.provider isEqualToString:@"anonymous"]) {
             statusText = @"Logged in anonymously";
@@ -201,8 +195,15 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 
 - (BOOL)googleIsSetup
 {
-    if ([@"<your-google-client-id>" isEqualToString:kGoogleClientID]) {
-        [self showErrorAlertWithMessage:@"Please set kGoogleClientId to your Google Client ID in ViewController.m"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"GoogleService-Info" ofType:@"plist"];
+    NSDictionary *plist = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSString *reversedClientId =[plist objectForKey:@"REVERSED_CLIENT_ID"];
+    BOOL clientIdExists = [plist objectForKey:@"CLIENT_ID"] != nil;
+    BOOL reversedClientIdExists = reversedClientId != nil;
+    BOOL canOpenGoogle =[[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://", reversedClientId]]];
+
+    if (!(clientIdExists && reversedClientIdExists && canOpenGoogle)) {
+        [self showErrorAlertWithMessage:@"Please add `GoogleService-Info.plist` to `Supporting Files` and\nURL types > Url Schemes in `Supporting Files/Info.plist`"];
         return NO;
     } else {
         return YES;
@@ -221,7 +222,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 
 - (BOOL)firebaseIsSetup
 {
-    if ([@"https://<your-firebase>.firebaseio.com" isEqualToString:kFirebaseURL]) {
+    if ([@"https://<your-firebase-database>.firebaseio.com" isEqualToString:kFirebaseURL]) {
         [self showErrorAlertWithMessage:@"Please set kFirebaseURL to your Firebase's URL in ViewController.m"];
         return NO;
     } else {
@@ -259,7 +260,7 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 }
 
 /*****************************
- *          GOOGLE+          *
+ *          GOOGLE           *
  *****************************/
 - (void)googleButtonPressed
 {
@@ -270,31 +271,24 @@ static NSString * const kGoogleClientID = @"<your-google-client-id>";
 
 - (void)googleLogin
 {
-    [self showProgressAlert];
-    // use the Google+ SDK to get an OAuth token
-    GPPSignIn *signIn = [GPPSignIn sharedInstance];
-    signIn.shouldFetchGooglePlusUser = YES;
-    signIn.clientID = kGoogleClientID;
-    signIn.scopes = @[];
-    signIn.delegate = self;
-    // authenticate will do a callback to finishedWithAuth:error:
-    [signIn authenticate];
+    GIDSignIn *googleSignIn = [GIDSignIn sharedInstance];
+    googleSignIn.delegate = self;
+    googleSignIn.uiDelegate = self;
+    [googleSignIn signIn];
 }
 
-- (void)finishedWithAuth:(GTMOAuth2Authentication *)auth
-                   error:(NSError *)error
-{
-    NSLog(@"Received Googl+ authentication response! Error: %@", error);
+- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+    NSLog(@"Received Google authentication response! Error: %@", error);
     if (error != nil) {
-        // there was an error obtaining the Google+ OAuth token, display a dialog
-        [self.loginProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
-        NSString *message = [NSString stringWithFormat:@"There was an error logging into Google+: %@",
+        // There was an error obtaining the Google OAuth token, display a dialog
+        NSString *message = [NSString stringWithFormat:@"There was an error logging into Google: %@",
                              [error localizedDescription]];
         [self showErrorAlertWithMessage:message];
     } else {
         // We successfully obtained an OAuth token, authenticate on Firebase with it
-        [self.ref authWithOAuthProvider:@"google" token:auth.accessToken withCompletionBlock:[self loginBlockForProviderName:@"Google+"]];
+        [self.ref authWithOAuthProvider:@"google" token:user.authentication.accessToken withCompletionBlock:[self loginBlockForProviderName:@"Google"]];
     }
+
 }
 
 /*****************************
