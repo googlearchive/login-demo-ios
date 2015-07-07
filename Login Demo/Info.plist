@@ -6,18 +6,22 @@
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>Dummy</key>
+	<string>NOTE: Expand the URL types below and configure FacebookURL with &quot;&lt;YOUR FACEBOOK APP ID&gt;&quot; and/or GoogleURL with &quot;&lt;YOUR GOOGLE REVERSE CLIENT ID&gt;&quot;</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -51,10 +55,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>Dummy</key>
-	<string>NOTE: Expand the URL types below and configure &quot;&lt;YOUR FACEBOOK APP ID&gt;&quot;</string>
 	<key>FacebookAppID</key>
 	<string>&lt;YOUR FACEBOOK APP ID&gt;</string>
 	<key>FacebookDisplayName</key>
