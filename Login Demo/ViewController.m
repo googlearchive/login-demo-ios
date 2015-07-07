@@ -11,7 +11,7 @@
 
 // The Firebase you want to use for this app
 // You must setup Firebase Login for the various authentication providers in the Dashboard under Login & Auth.
-static NSString * const kFirebaseURL = @"https://<your-firebase-database>.firebaseio.com";
+static NSString * const kFirebaseURL = @"https://<your-firebase-app>.firebaseio.com";
 
 // The twitter API key you setup in the Twitter developer console
 static NSString * const kTwitterAPIKey = @"<your-twitter-api-key>";
@@ -222,7 +222,7 @@ static NSString * const kTwitterAPIKey = @"<your-twitter-api-key>";
 
 - (BOOL)firebaseIsSetup
 {
-    if ([@"https://<your-firebase-database>.firebaseio.com" isEqualToString:kFirebaseURL]) {
+    if ([@"https://<your-firebase-app>.firebaseio.com" isEqualToString:kFirebaseURL]) {
         [self showErrorAlertWithMessage:@"Please set kFirebaseURL to your Firebase's URL in ViewController.m"];
         return NO;
     } else {

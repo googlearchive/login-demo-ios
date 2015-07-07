@@ -19,10 +19,13 @@ Next, open `Login Demo.xcworkspace` in XCode (not `Login Demo.xcodeproj`,
 since you need to include the Cocoapod dependencies).
 
 You'll then need to edit the file `Login Demo/ViewController.m` and specify the
-Firebase app you're using as well as your Twitter / Google OAuth API keys. To setup
+Firebase app you're using as well as your Twitter API key. To setup
 Facebook auth, you'll need to open `Supporting Files/Info.plist`.
 and set FacebookAppID and FacebookDisplayName as well as configure a
-URL Scheme to match your App ID.
+URL Scheme to match your App ID. To setup
+Google auth, you'll need to add a `GoogleService-Info.plist`.
+and as well as
+URL Scheme to match your Reversed Client ID.
 
 Don't forget to [enable the relevant OAuth providers](https://www.firebase.com/docs/ios/guide/user-auth.html#section-enable-providers)
 in your Firebase app.
