@@ -23,8 +23,7 @@ Firebase app you're using as well as your Twitter API key. To setup
 Facebook auth, you'll need to open `Supporting Files/Info.plist`.
 and set FacebookAppID and FacebookDisplayName as well as configure a
 URL Scheme to match your App ID. To setup
-Google auth, you'll need to add a `GoogleService-Info.plist`.
-and as well as
+Google auth, you'll need to add a `GoogleService-Info.plist` as well as configure a
 URL Scheme to match your Reversed Client ID.
 
 Don't forget to [enable the relevant OAuth providers](https://www.firebase.com/docs/ios/guide/user-auth.html#section-enable-providers)
