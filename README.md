@@ -6,7 +6,7 @@ as well as anonymous authentication. Note that
 Firebase also supports authentication with email & password and custom auth tokens.
 You can read the full [iOS authentication guide here](https://www.firebase.com/docs/ios/guide/user-auth.html).
 
-This demo requires that [Cocoapods](https://cocoapods.org/) is installed.
+This demo requires that [CocoaPods](https://cocoapods.org/) is installed.
 
 Running the Demo
 ----------------
