@@ -1,3 +1,7 @@
+# This is a legacy Firebase example (for SDK 2.x.x). You probably want to use one of the up-to-date examples at https://firebase.google.com/docs/samples
+
+---
+
 # Login Demo for iOS
 
 This is a demo of using Firebase's authentication features in
